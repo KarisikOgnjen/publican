@@ -8,4 +8,12 @@ function calculate(operation, num1, num2) {
   }
 }
 
-module.exports = { calculate };
+function sin(radian) {
+  return Math.sin(radian);
+}
+
+function cos(radian) {
+  return Math.cos(radian);
+}
+
+module.exports = { calculate, sin, cos };
