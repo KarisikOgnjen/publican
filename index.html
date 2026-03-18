@@ -9,27 +9,48 @@
 <body>
   <div class="calculator">
     <input type="number" id="num1" placeholder="Number 1">
-    <select id="operation">
-      <option value="add">Add</option>
-      <option value="subtract">Subtract</option>
-    </select>
     <input type="number" id="num2" placeholder="Number 2">
-    <button onclick="runCalculate()">Calculate</button>
+    <div class="buttons">
+      <button class="add-button" onclick="runCalculate('add')">Add</button>
+      <button class="subtract-button" onclick="runCalculate('subtract')">Subtract</button>
+      <button class="multiply-button" onclick="runCalculate('multiply')">Multiply</button>
+      <button class="divide-button" onclick="runCalculate('divide')">Divide</button>
+      <button class="equal-button" onclick="showResult()">=</button>
+      <button class="clear-button" onclick="clearCalc()">Clear</button>
+    </div>
     <div id="result"></div>
   </div>
 
   <script>
-    function runCalculate() {
+    let pendingOperation = null;
+
+    function runCalculate(operation) {
+      pendingOperation = operation;
+      document.getElementById('result').textContent = 'Operation: ' + operation;
+    }
+
+    function showResult() {
       const num1 = parseFloat(document.getElementById('num1').value);
       const num2 = parseFloat(document.getElementById('num2').value);
-      const operation = document.getElementById('operation').value;
+      if (!pendingOperation) return;
       let result;
-      if (operation === 'add') {
+      if (pendingOperation === 'add') {
         result = num1 + num2;
-      } else if (operation === 'subtract') {
+      } else if (pendingOperation === 'subtract') {
         result = num1 - num2;
+      } else if (pendingOperation === 'multiply') {
+        result = num1 * num2;
+      } else if (pendingOperation === 'divide') {
+        result = num1 / num2;
       }
       document.getElementById('result').textContent = 'Result: ' + result;
+    }
+
+    function clearCalc() {
+      document.getElementById('num1').value = '';
+      document.getElementById('num2').value = '';
+      document.getElementById('result').textContent = '';
+      pendingOperation = null;
     }
   </script>
 </body>

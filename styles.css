@@ -1,3 +1,27 @@
 .calculator {
   background-color: #0000FF;
 }
+
+.add-button {
+  background-color: #00FF00;
+}
+
+.subtract-button {
+  background-color: #FF0000;
+}
+
+.multiply-button {
+  background-color: #FFFF00;
+}
+
+.divide-button {
+  background-color: #0000FF;
+}
+
+.equal-button {
+  background-color: #FFA500;
+}
+
+.clear-button {
+  background-color: #808080;
+}
