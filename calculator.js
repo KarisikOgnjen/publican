@@ -16,4 +16,11 @@ function cos(radian) {
   return Math.cos(radian);
 }
 
-module.exports = { calculate, sin, cos };
+function sqrt(num) {
+  if (num < 0) {
+    throw new Error('Cannot take square root of a negative number');
+  }
+  return Math.sqrt(num);
+}
+
+module.exports = { calculate, sin, cos, sqrt };
