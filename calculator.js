@@ -23,4 +23,8 @@ function sqrt(num) {
   return Math.sqrt(num);
 }
 
-module.exports = { calculate, sin, cos, sqrt };
+function percentage(num) {
+  return num / 100;
+}
+
+module.exports = { calculate, sin, cos, sqrt, percentage };

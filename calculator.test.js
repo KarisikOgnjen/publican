@@ -1,5 +1,5 @@
 const assert = require('assert');
-const { calculate, sin, cos, sqrt } = require('./calculator');
+const { calculate, sin, cos, sqrt, percentage } = require('./calculator');
 
 // Addition
 assert.strictEqual(calculate('add', 2, 3), 5);
@@ -29,5 +29,11 @@ assert.strictEqual(sqrt(0), 0);
 assert.strictEqual(sqrt(4), 2);
 assert.strictEqual(sqrt(9), 3);
 assert.throws(() => sqrt(-1), /negative/);
+
+// Percentage
+assert.strictEqual(percentage(50), 0.5);
+assert.strictEqual(percentage(100), 1);
+assert.strictEqual(percentage(0), 0);
+assert.strictEqual(percentage(200), 2);
 
 console.log('All tests passed.');
