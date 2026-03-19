@@ -7,6 +7,8 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+
+  <!-- Calculator -->
   <div class="calculator">
     <input type="number" id="num1" placeholder="Number 1">
     <select id="operation">
@@ -20,7 +22,49 @@
     <div id="result"></div>
   </div>
 
+  <!-- Test Reviewer -->
+  <section class="test-reviewer" aria-label="Test Reviewer">
+    <h1>Test Reviewer</h1>
+    <div class="reviewer-layout">
+
+      <!-- Task List -->
+      <div class="task-list-panel">
+        <h2>Tasks</h2>
+        <ul class="task-list" id="taskList">
+          <li class="no-tasks-msg" id="noTasksMsg">No tasks yet. Create one on the right.</li>
+        </ul>
+      </div>
+
+      <!-- Task Form -->
+      <div class="task-form-panel">
+        <h2 id="formTitle">Create Task</h2>
+
+        <div class="form-group">
+          <label for="taskTitle">Title</label>
+          <input type="text" id="taskTitle" placeholder="Enter task title">
+        </div>
+
+        <div class="form-group">
+          <label for="taskDescription">Description</label>
+          <textarea id="taskDescription" placeholder="Enter task description"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="taskCriteria">Acceptance Criteria</label>
+          <textarea id="taskCriteria" placeholder="Enter acceptance criteria (one per line)"></textarea>
+        </div>
+
+        <div class="form-actions">
+          <button class="add-button" id="submitBtn" onclick="submitTask()">Add Task</button>
+          <button class="cancel-button" id="cancelBtn" onclick="cancelEdit()" style="display:none;">Cancel</button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
   <script>
+    // ── Calculator ──────────────────────────────────────────
     function runCalculate() {
       const num1 = parseFloat(document.getElementById('num1').value);
       const num2 = parseFloat(document.getElementById('num2').value);
@@ -48,6 +92,131 @@
       }
       const result = Math.sqrt(num1);
       document.getElementById('result').textContent = 'Result: ' + result;
+    }
+
+    // ── Test Reviewer ───────────────────────────────────────
+    var tasks = [];
+    var editingIndex = -1;
+
+    function renderTasks() {
+      var list = document.getElementById('taskList');
+      var noMsg = document.getElementById('noTasksMsg');
+
+      if (tasks.length === 0) {
+        list.innerHTML = '';
+        var li = document.createElement('li');
+        li.id = 'noTasksMsg';
+        li.className = 'no-tasks-msg';
+        li.textContent = 'No tasks yet. Create one on the right.';
+        list.appendChild(li);
+        return;
+      }
+
+      list.innerHTML = '';
+      for (var i = 0; i < tasks.length; i++) {
+        (function(idx) {
+          var task = tasks[idx];
+          var li = document.createElement('li');
+          li.className = 'task-item';
+
+          var info = document.createElement('div');
+          info.className = 'task-item-info';
+
+          var titleEl = document.createElement('div');
+          titleEl.className = 'task-item-title';
+          titleEl.textContent = task.title;
+
+          var descEl = document.createElement('div');
+          descEl.className = 'task-item-desc';
+          descEl.textContent = task.description || '';
+
+          info.appendChild(titleEl);
+          if (task.description) info.appendChild(descEl);
+
+          if (task.criteria) {
+            var criteriaEl = document.createElement('div');
+            criteriaEl.className = 'task-item-desc';
+            criteriaEl.style.marginTop = '4px';
+            criteriaEl.style.color = '#888';
+            criteriaEl.textContent = 'Criteria: ' + task.criteria;
+            info.appendChild(criteriaEl);
+          }
+
+          var actions = document.createElement('div');
+          actions.className = 'task-item-actions';
+
+          var editBtn = document.createElement('button');
+          editBtn.className = 'edit-button';
+          editBtn.textContent = 'Edit';
+          editBtn.onclick = function() { startEdit(idx); };
+
+          var delBtn = document.createElement('button');
+          delBtn.className = 'delete-button';
+          delBtn.textContent = 'Delete';
+          delBtn.onclick = function() { deleteTask(idx); };
+
+          actions.appendChild(editBtn);
+          actions.appendChild(delBtn);
+
+          li.appendChild(info);
+          li.appendChild(actions);
+          list.appendChild(li);
+        })(i);
+      }
+    }
+
+    function submitTask() {
+      var title = document.getElementById('taskTitle').value.trim();
+      var description = document.getElementById('taskDescription').value.trim();
+      var criteria = document.getElementById('taskCriteria').value.trim();
+
+      if (!title) {
+        alert('Title is required.');
+        document.getElementById('taskTitle').focus();
+        return;
+      }
+
+      if (editingIndex >= 0) {
+        tasks[editingIndex] = { title: title, description: description, criteria: criteria };
+        cancelEdit();
+      } else {
+        tasks.push({ title: title, description: description, criteria: criteria });
+        clearForm();
+      }
+
+      renderTasks();
+    }
+
+    function startEdit(idx) {
+      editingIndex = idx;
+      var task = tasks[idx];
+      document.getElementById('taskTitle').value = task.title;
+      document.getElementById('taskDescription').value = task.description || '';
+      document.getElementById('taskCriteria').value = task.criteria || '';
+      document.getElementById('formTitle').textContent = 'Edit Task';
+      document.getElementById('submitBtn').textContent = 'Save Changes';
+      document.getElementById('cancelBtn').style.display = '';
+      document.getElementById('taskTitle').focus();
+    }
+
+    function cancelEdit() {
+      editingIndex = -1;
+      clearForm();
+      document.getElementById('formTitle').textContent = 'Create Task';
+      document.getElementById('submitBtn').textContent = 'Add Task';
+      document.getElementById('cancelBtn').style.display = 'none';
+    }
+
+    function deleteTask(idx) {
+      if (editingIndex === idx) cancelEdit();
+      tasks.splice(idx, 1);
+      renderTasks();
+    }
+
+    function clearForm() {
+      document.getElementById('taskTitle').value = '';
+      document.getElementById('taskDescription').value = '';
+      document.getElementById('taskCriteria').value = '';
     }
   </script>
 </body>

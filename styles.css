@@ -1,3 +1,261 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  background-color: #f0f2f5;
+  color: #333;
+  padding: 20px;
+}
+
+/* ── Calculator ── */
 .calculator {
   background-color: #0000FF;
+  color: #fff;
+  padding: 16px;
+  border-radius: 8px;
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 32px;
+}
+
+.calculator input,
+.calculator select {
+  padding: 6px 8px;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.calculator button {
+  padding: 6px 12px;
+  background-color: #fff;
+  color: #0000FF;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.calculator button:hover {
+  background-color: #e0e0ff;
+}
+
+#result {
+  width: 100%;
+  font-weight: bold;
+  font-size: 16px;
+  margin-top: 4px;
+}
+
+/* ── Test Reviewer ── */
+.test-reviewer {
+  max-width: 900px;
+}
+
+.test-reviewer h1 {
+  font-size: 22px;
+  margin-bottom: 20px;
+  color: #222;
+}
+
+.reviewer-layout {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+/* Task List Panel */
+.task-list-panel {
+  flex: 1;
+  min-width: 260px;
+}
+
+.task-list-panel h2 {
+  font-size: 16px;
+  margin-bottom: 12px;
+  color: #444;
+}
+
+.task-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.task-item {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 12px 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.task-item-info {
+  flex: 1;
+}
+
+.task-item-title {
+  font-weight: bold;
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
+.task-item-desc {
+  font-size: 12px;
+  color: #666;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.task-item-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.edit-button {
+  padding: 4px 10px;
+  font-size: 12px;
+  background-color: #f0f0f0;
+  color: #333;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.edit-button:hover {
+  background-color: #e0e0e0;
+}
+
+.delete-button {
+  padding: 4px 10px;
+  font-size: 12px;
+  background-color: #ffe0e0;
+  color: #c00;
+  border: 1px solid #f5c6c6;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.delete-button:hover {
+  background-color: #ffc0c0;
+}
+
+.no-tasks-msg {
+  color: #999;
+  font-size: 13px;
+  font-style: italic;
+}
+
+/* Task Form Panel */
+.task-form-panel {
+  flex: 1;
+  min-width: 260px;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.task-form-panel h2 {
+  font-size: 16px;
+  margin-bottom: 16px;
+  color: #444;
+}
+
+.form-group {
+  margin-bottom: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.form-group label {
+  font-size: 13px;
+  font-weight: bold;
+  color: #555;
+}
+
+.form-group input[type="text"],
+.form-group textarea {
+  padding: 8px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  font-family: inherit;
+  resize: vertical;
+  width: 100%;
+}
+
+.form-group input[type="text"]:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #0000FF;
+  box-shadow: 0 0 0 2px rgba(0, 0, 255, 0.15);
+}
+
+.form-group textarea {
+  min-height: 80px;
+}
+
+.form-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 6px;
+}
+
+.add-button {
+  padding: 8px 18px;
+  background-color: #0000FF;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.add-button:hover {
+  background-color: #0000cc;
+}
+
+.cancel-button {
+  padding: 8px 18px;
+  background-color: #f0f0f0;
+  color: #555;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.cancel-button:hover {
+  background-color: #e0e0e0;
+}
+
+/* Responsive — stack panels on narrow screens */
+@media (max-width: 600px) {
+  .reviewer-layout {
+    flex-direction: column;
+  }
+
+  .task-list-panel,
+  .task-form-panel {
+    min-width: 0;
+    width: 100%;
+  }
 }
