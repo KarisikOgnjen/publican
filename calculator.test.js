@@ -1,5 +1,5 @@
 const assert = require('assert');
-const { calculate, sin, cos } = require('./calculator');
+const { calculate, sin, cos, sqrt } = require('./calculator');
 
 // Addition
 assert.strictEqual(calculate('add', 2, 3), 5);
@@ -23,5 +23,11 @@ assert.ok(Math.abs(sin(Math.PI) - 0) < 1e-10);
 assert.strictEqual(cos(0), 1);
 assert.ok(Math.abs(cos(Math.PI / 2)) < 1e-10);
 assert.ok(Math.abs(cos(Math.PI) - (-1)) < 1e-10);
+
+// Sqrt
+assert.strictEqual(sqrt(0), 0);
+assert.strictEqual(sqrt(4), 2);
+assert.strictEqual(sqrt(9), 3);
+assert.throws(() => sqrt(-1), /negative/);
 
 console.log('All tests passed.');
