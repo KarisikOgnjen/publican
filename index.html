@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="calculator">
+  <div class="calculator" id="calculator1">
     <input type="number" id="num1" placeholder="Number 1">
     <select id="operation">
       <option value="add">Add</option>
@@ -18,6 +18,19 @@
     <button onclick="runPercentage()">%</button>
     <button onclick="runSqrt()">√</button>
     <div id="result"></div>
+  </div>
+
+  <div class="calculator" id="calculator2">
+    <input type="number" id="num1Duplicate" placeholder="Number 1">
+    <select id="operationDuplicate">
+      <option value="add">Add</option>
+      <option value="subtract">Subtract</option>
+    </select>
+    <input type="number" id="num2Duplicate" placeholder="Number 2">
+    <button onclick="runCalculateDuplicate()">Calculate</button>
+    <button onclick="runPercentageDuplicate()">%</button>
+    <button onclick="runSqrtDuplicate()">√</button>
+    <div id="resultDuplicate"></div>
   </div>
 
   <script>
@@ -48,6 +61,35 @@
       }
       const result = Math.sqrt(num1);
       document.getElementById('result').textContent = 'Result: ' + result;
+    }
+
+    function runCalculateDuplicate() {
+      const num1 = parseFloat(document.getElementById('num1Duplicate').value);
+      const num2 = parseFloat(document.getElementById('num2Duplicate').value);
+      const operation = document.getElementById('operationDuplicate').value;
+      let result;
+      if (operation === 'add') {
+        result = num1 + num2;
+      } else if (operation === 'subtract') {
+        result = num1 - num2;
+      }
+      document.getElementById('resultDuplicate').textContent = 'Result: ' + result;
+    }
+
+    function runPercentageDuplicate() {
+      const num1 = parseFloat(document.getElementById('num1Duplicate').value);
+      const result = num1 / 100;
+      document.getElementById('resultDuplicate').textContent = 'Result: ' + result;
+    }
+
+    function runSqrtDuplicate() {
+      const num1 = parseFloat(document.getElementById('num1Duplicate').value);
+      if (num1 < 0) {
+        document.getElementById('resultDuplicate').textContent = 'Error: Cannot take square root of a negative number';
+        return;
+      }
+      const result = Math.sqrt(num1);
+      document.getElementById('resultDuplicate').textContent = 'Result: ' + result;
     }
   </script>
 </body>
