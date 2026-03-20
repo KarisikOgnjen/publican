@@ -1,7 +1,4 @@
 #!/bin/bash
-# PostToolUse hook — auto-check posle Write/Edit
-# Claude Code prosledjuje JSON na stdin
-
 INPUT=$(cat)
 FILE=$(echo "$INPUT" | python3 -c "
 import sys, json
@@ -12,10 +9,7 @@ except:
     print('')
 " 2>/dev/null)
 
-if [ -z "$FILE" ]; then
-  exit 0
-fi
+[ -z "$FILE" ] && exit 0
 
-# No type checker configured
 
 exit 0

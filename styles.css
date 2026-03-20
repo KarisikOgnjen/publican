@@ -1,3 +1,20 @@
 .calculator {
   background-color: #0000FF;
+  width: 100%;
+  max-width: 800px;
+  box-sizing: border-box;
+}
+
+@media (max-width: 1023px) and (min-width: 768px) {
+  .calculator {
+    max-width: 600px;
+  }
+}
+
+@media (max-width: 767px) {
+  .calculator {
+    max-width: 100%;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
 }
