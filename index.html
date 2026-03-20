@@ -12,11 +12,14 @@
     <select id="operation">
       <option value="add">Add</option>
       <option value="subtract">Subtract</option>
+      <option value="percentage">%</option>
+      <option value="sqrt">√</option>
     </select>
     <input type="number" id="num2" placeholder="Number 2">
     <button onclick="runCalculate()">Calculate</button>
     <button onclick="runPercentage()">%</button>
     <button onclick="runSqrt()">√</button>
+    <button class="enter-button" onclick="runEnter()">Enter</button>
     <div id="result"></div>
   </div>
 
@@ -47,6 +50,27 @@
         return;
       }
       const result = Math.sqrt(num1);
+      document.getElementById('result').textContent = 'Result: ' + result;
+    }
+
+    function runEnter() {
+      const num1 = parseFloat(document.getElementById('num1').value);
+      const num2 = parseFloat(document.getElementById('num2').value);
+      const operation = document.getElementById('operation').value;
+      let result;
+      if (operation === 'add') {
+        result = num1 + num2;
+      } else if (operation === 'subtract') {
+        result = num1 - num2;
+      } else if (operation === 'percentage') {
+        result = num1 / 100;
+      } else if (operation === 'sqrt') {
+        if (num1 < 0) {
+          document.getElementById('result').textContent = 'Error: Cannot take square root of a negative number';
+          return;
+        }
+        result = Math.sqrt(num1);
+      }
       document.getElementById('result').textContent = 'Result: ' + result;
     }
   </script>
