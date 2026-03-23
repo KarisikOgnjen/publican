@@ -27,4 +27,8 @@ function percentage(num) {
   return num / 100;
 }
 
-module.exports = { calculate, sin, cos, sqrt, percentage };
+function invert(num) {
+  return num * -1;
+}
+
+module.exports = { calculate, sin, cos, sqrt, percentage, invert };
