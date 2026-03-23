@@ -27,4 +27,11 @@ function percentage(num) {
   return num / 100;
 }
 
-module.exports = { calculate, sin, cos, sqrt, percentage };
+function invert(num) {
+  if (num === 0) {
+    return 0;
+  }
+  return -num;
+}
+
+module.exports = { calculate, sin, cos, sqrt, percentage, invert };
