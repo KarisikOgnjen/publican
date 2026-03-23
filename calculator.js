@@ -34,6 +34,11 @@ function invert(num) {
   return -num;
 }
 
+/**
+ * Doubles a number.
+ * @param {number} num - The number to double.
+ * @returns {number} The number multiplied by 2.
+ */
 function double(num) {
   return num * 2;
 }
