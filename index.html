@@ -7,6 +7,8 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+
+  <!-- Calculator 1 -->
   <div class="calculator" id="calculator1">
     <input type="number" id="num1" placeholder="Number 1">
     <select id="operation">
@@ -14,12 +16,28 @@
       <option value="subtract">Subtract</option>
     </select>
     <input type="number" id="num2" placeholder="Number 2">
-    <button onclick="runCalculate()">Calculate</button>
-    <button onclick="runPercentage()">%</button>
-    <button onclick="runSqrt()">√</button>
-    <div id="result"></div>
+    <div class="btn-row">
+      <button class="btn-calculate" onclick="runCalculate()">Calculate</button>
+      <button class="btn-operator" onclick="runPercentage()">%</button>
+      <button class="btn-basic" onclick="runSqrt()">√</button>
+    </div>
+    <button class="btn-mode" onclick="toggleScientific('scientific1')">Scientific Mode</button>
+    <div class="scientific-panel" id="scientific1">
+      <div class="btn-row">
+        <button class="btn-scientific" onclick="runSin()">sin</button>
+        <button class="btn-scientific" onclick="runCos()">cos</button>
+        <button class="btn-scientific" onclick="runTan()">tan</button>
+      </div>
+      <div class="btn-row">
+        <button class="btn-scientific" onclick="runLog()">log₁₀</button>
+        <button class="btn-scientific" onclick="runLn()">ln</button>
+        <button class="btn-scientific" onclick="runExp()">eˣ</button>
+      </div>
+    </div>
+    <div class="result-display" id="result" role="status" aria-live="polite"></div>
   </div>
 
+  <!-- Calculator 2 -->
   <div class="calculator" id="calculator2">
     <input type="number" id="num1Duplicate" placeholder="Number 1">
     <select id="operationDuplicate">
@@ -27,13 +45,35 @@
       <option value="subtract">Subtract</option>
     </select>
     <input type="number" id="num2Duplicate" placeholder="Number 2">
-    <button onclick="runCalculateDuplicate()">Calculate</button>
-    <button onclick="runPercentageDuplicate()">%</button>
-    <button onclick="runSqrtDuplicate()">√</button>
-    <div id="resultDuplicate"></div>
+    <div class="btn-row">
+      <button class="btn-calculate" onclick="runCalculateDuplicate()">Calculate</button>
+      <button class="btn-operator" onclick="runPercentageDuplicate()">%</button>
+      <button class="btn-basic" onclick="runSqrtDuplicate()">√</button>
+    </div>
+    <button class="btn-mode" onclick="toggleScientific('scientific2')">Scientific Mode</button>
+    <div class="scientific-panel" id="scientific2">
+      <div class="btn-row">
+        <button class="btn-scientific" onclick="runSinDuplicate()">sin</button>
+        <button class="btn-scientific" onclick="runCosDuplicate()">cos</button>
+        <button class="btn-scientific" onclick="runTanDuplicate()">tan</button>
+      </div>
+      <div class="btn-row">
+        <button class="btn-scientific" onclick="runLogDuplicate()">log₁₀</button>
+        <button class="btn-scientific" onclick="runLnDuplicate()">ln</button>
+        <button class="btn-scientific" onclick="runExpDuplicate()">eˣ</button>
+      </div>
+    </div>
+    <div class="result-display" id="resultDuplicate" role="status" aria-live="polite"></div>
   </div>
 
   <script>
+    function toggleScientific(panelId) {
+      const panel = document.getElementById(panelId);
+      panel.classList.toggle('visible');
+    }
+
+    /* ---- Calculator 1 ---- */
+
     function runCalculate() {
       const num1 = parseFloat(document.getElementById('num1').value);
       const num2 = parseFloat(document.getElementById('num2').value);
@@ -63,6 +103,52 @@
       document.getElementById('result').textContent = 'Result: ' + result;
     }
 
+    function runSin() {
+      const num1 = parseFloat(document.getElementById('num1').value);
+      const result = Math.sin(num1);
+      document.getElementById('result').textContent = 'Result: ' + result;
+    }
+
+    function runCos() {
+      const num1 = parseFloat(document.getElementById('num1').value);
+      const result = Math.cos(num1);
+      document.getElementById('result').textContent = 'Result: ' + result;
+    }
+
+    function runTan() {
+      const num1 = parseFloat(document.getElementById('num1').value);
+      const result = Math.tan(num1);
+      document.getElementById('result').textContent = 'Result: ' + result;
+    }
+
+    function runLog() {
+      const num1 = parseFloat(document.getElementById('num1').value);
+      if (num1 <= 0) {
+        document.getElementById('result').textContent = 'Error: log requires a positive number';
+        return;
+      }
+      const result = Math.log10(num1);
+      document.getElementById('result').textContent = 'Result: ' + result;
+    }
+
+    function runLn() {
+      const num1 = parseFloat(document.getElementById('num1').value);
+      if (num1 <= 0) {
+        document.getElementById('result').textContent = 'Error: ln requires a positive number';
+        return;
+      }
+      const result = Math.log(num1);
+      document.getElementById('result').textContent = 'Result: ' + result;
+    }
+
+    function runExp() {
+      const num1 = parseFloat(document.getElementById('num1').value);
+      const result = Math.exp(num1);
+      document.getElementById('result').textContent = 'Result: ' + result;
+    }
+
+    /* ---- Calculator 2 (Duplicate) ---- */
+
     function runCalculateDuplicate() {
       const num1 = parseFloat(document.getElementById('num1Duplicate').value);
       const num2 = parseFloat(document.getElementById('num2Duplicate').value);
@@ -89,6 +175,50 @@
         return;
       }
       const result = Math.sqrt(num1);
+      document.getElementById('resultDuplicate').textContent = 'Result: ' + result;
+    }
+
+    function runSinDuplicate() {
+      const num1 = parseFloat(document.getElementById('num1Duplicate').value);
+      const result = Math.sin(num1);
+      document.getElementById('resultDuplicate').textContent = 'Result: ' + result;
+    }
+
+    function runCosDuplicate() {
+      const num1 = parseFloat(document.getElementById('num1Duplicate').value);
+      const result = Math.cos(num1);
+      document.getElementById('resultDuplicate').textContent = 'Result: ' + result;
+    }
+
+    function runTanDuplicate() {
+      const num1 = parseFloat(document.getElementById('num1Duplicate').value);
+      const result = Math.tan(num1);
+      document.getElementById('resultDuplicate').textContent = 'Result: ' + result;
+    }
+
+    function runLogDuplicate() {
+      const num1 = parseFloat(document.getElementById('num1Duplicate').value);
+      if (num1 <= 0) {
+        document.getElementById('resultDuplicate').textContent = 'Error: log requires a positive number';
+        return;
+      }
+      const result = Math.log10(num1);
+      document.getElementById('resultDuplicate').textContent = 'Result: ' + result;
+    }
+
+    function runLnDuplicate() {
+      const num1 = parseFloat(document.getElementById('num1Duplicate').value);
+      if (num1 <= 0) {
+        document.getElementById('resultDuplicate').textContent = 'Error: ln requires a positive number';
+        return;
+      }
+      const result = Math.log(num1);
+      document.getElementById('resultDuplicate').textContent = 'Result: ' + result;
+    }
+
+    function runExpDuplicate() {
+      const num1 = parseFloat(document.getElementById('num1Duplicate').value);
+      const result = Math.exp(num1);
       document.getElementById('resultDuplicate').textContent = 'Result: ' + result;
     }
   </script>
