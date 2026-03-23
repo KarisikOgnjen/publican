@@ -10,13 +10,13 @@
   --color-input-border: #555555;
   --color-input-text: #1a1a2e;
 
-  --color-btn: #14532d;              /* green-900 — contrast 10.6:1 on white */
+  --color-btn: #14532d;              /* green-900 — contrast 10.4:1 on white */
   --color-btn-text: #ffffff;
 
   /* Green palette — all WCAG 2.1 AA compliant (≥4.5:1 contrast with #fff) */
-  --color-green-1: #14532d;         /* green-900 — contrast 10.6:1 — calculate/primary */
-  --color-green-2: #15803d;         /* green-700 — contrast  5.9:1 — operators/mode    */
-  --color-green-3: #16a34a;         /* green-600 — contrast  4.6:1 — basic/scientific  */
+  --color-blue-1: #14532d;          /* green-900 — contrast 10.4:1 — calculate/primary */
+  --color-blue-2: #15803d;          /* green-700 — contrast  5.9:1 — operators/mode    */
+  --color-blue-3: #16a34a;          /* green-600 — contrast  5.0:1 — basic/scientific  */
 }
 
 body {
