@@ -34,4 +34,8 @@ function invert(num) {
   return -num;
 }
 
-module.exports = { calculate, sin, cos, sqrt, percentage, invert };
+function double(num) {
+  return num * 2;
+}
+
+module.exports = { calculate, sin, cos, sqrt, percentage, invert, double };

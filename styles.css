@@ -10,16 +10,8 @@
   --color-input-border: #555555;
   --color-input-text: #1a1a2e;
 
-  --color-btn-basic: #4338CA;        /* indigo — contrast 5.1:1 on white */
-  --color-btn-basic-text: #ffffff;
-  --color-btn-operator: #B45309;     /* dark amber — contrast 4.6:1 on white */
-  --color-btn-operator-text: #ffffff;
-  --color-btn-scientific: #009E73;   /* bluish-green — contrast 6.18:1 on dark */
-  --color-btn-scientific-text: #ffffff;
-  --color-btn-calculate: #006D75;    /* deep teal — contrast 5.8:1 on white */
-  --color-btn-calculate-text: #ffffff;
-  --color-btn-mode: #CC79A7;         /* reddish-purple — contrast 5.77:1 on dark */
-  --color-btn-mode-text: #1a1a1a;
+  --color-btn: #4338CA;              /* indigo — contrast 5.1:1 on white */
+  --color-btn-text: #ffffff;
 }
 
 body {
@@ -70,7 +62,7 @@ body {
 }
 
 .calculator input[type="number"]:focus {
-  outline: 3px solid var(--color-btn-basic);
+  outline: 3px solid var(--color-btn);
   outline-offset: 1px;
 }
 
@@ -120,29 +112,16 @@ body {
 }
 
 /* Button variants */
-.btn-basic {
-  background-color: var(--color-btn-basic);
-  color: var(--color-btn-basic-text);
-}
-
-.btn-operator {
-  background-color: var(--color-btn-operator);
-  color: var(--color-btn-operator-text);
-}
-
-.btn-scientific {
-  background-color: var(--color-btn-scientific);
-  color: var(--color-btn-scientific-text);
-}
-
-.btn-calculate {
-  background-color: var(--color-btn-calculate);
-  color: var(--color-btn-calculate-text);
+.btn-basic,
+.btn-operator,
+.btn-scientific,
+.btn-calculate,
+.btn-mode {
+  background-color: var(--color-btn);
+  color: var(--color-btn-text);
 }
 
 .btn-mode {
-  background-color: var(--color-btn-mode);
-  color: var(--color-btn-mode-text);
   width: 100%;
   flex: none;
 }
