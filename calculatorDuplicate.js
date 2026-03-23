@@ -68,4 +68,13 @@ function invert(num) {
   return -num;
 }
 
-module.exports = { calculate, sin, cos, sqrt, percentage, invert };
+/**
+ * Doubles a number.
+ * @param {number} num - The number to double.
+ * @returns {number} The number multiplied by 2.
+ */
+function double(num) {
+  return num * 2;
+}
+
+module.exports = { calculate, sin, cos, sqrt, percentage, invert, double };
