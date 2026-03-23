@@ -56,4 +56,16 @@ function percentage(num) {
   return num / 100;
 }
 
-module.exports = { calculate, sin, cos, sqrt, percentage };
+/**
+ * Inverts the sign of a number.
+ * @param {number} num - The number to invert.
+ * @returns {number} The negated number, or 0 if num is 0.
+ */
+function invert(num) {
+  if (num === 0) {
+    return 0;
+  }
+  return -num;
+}
+
+module.exports = { calculate, sin, cos, sqrt, percentage, invert };
