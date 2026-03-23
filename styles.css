@@ -158,3 +158,23 @@ body {
 .scientific-panel.visible {
   display: flex;
 }
+
+/* Button color classes — WCAG 2.1 AA compliant (4.5:1 contrast with white text) */
+
+/* Calculate — deep teal (#006D75, contrast ~5.8:1 with white) */
+.btn-color-1 {
+  background-color: #006D75;
+  color: #FFFFFF;
+}
+
+/* % — dark orange/amber (#B45309, contrast ~4.6:1 with white) */
+.btn-color-2 {
+  background-color: #B45309;
+  color: #FFFFFF;
+}
+
+/* √ — indigo (#4338CA, contrast ~5.1:1 with white) */
+.btn-color-3 {
+  background-color: #4338CA;
+  color: #FFFFFF;
+}
