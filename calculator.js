@@ -16,6 +16,28 @@ function cos(radian) {
   return Math.cos(radian);
 }
 
+function tan(radian) {
+  return Math.tan(radian);
+}
+
+function log(num) {
+  if (num <= 0) {
+    throw new Error('log requires a positive number');
+  }
+  return Math.log10(num);
+}
+
+function ln(num) {
+  if (num <= 0) {
+    throw new Error('ln requires a positive number');
+  }
+  return Math.log(num);
+}
+
+function exp(num) {
+  return Math.exp(num);
+}
+
 function sqrt(num) {
   if (num < 0) {
     throw new Error('Cannot take square root of a negative number');
@@ -34,4 +56,8 @@ function invert(num) {
   return -num;
 }
 
-module.exports = { calculate, sin, cos, sqrt, percentage, invert };
+function double(num) {
+  return num * 2;
+}
+
+module.exports = { calculate, sin, cos, tan, log, ln, exp, sqrt, percentage, invert, double };
