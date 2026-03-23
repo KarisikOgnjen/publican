@@ -147,6 +147,11 @@ body {
   flex: none;
 }
 
+.btn-row .btn-mode {
+  width: auto;
+  flex: 1;
+}
+
 /* Scientific panel — hidden by default */
 .scientific-panel {
   display: none;
