@@ -147,6 +147,11 @@ body {
   flex: none;
 }
 
+/* Button height adjustment */
+.btn-height-adjust {
+  height: 48px !important;
+}
+
 /* Scientific panel — hidden by default */
 .scientific-panel {
   display: none;
