@@ -45,6 +45,8 @@ export class IU {
       case 'log':          this.runLog(); break;
       case 'ln':           this.runLn(); break;
       case 'exp':          this.runExp(); break;
+      case 'invert':       this.runInvert(); break;
+      case 'double':       this.runDouble(); break;
       case 'toggleScientific': this.toggleScientific(); break;
     }
   }
@@ -105,6 +107,15 @@ export class IU {
 
   runExp() {
     this._display(Math.exp(this._getNum1()));
+  }
+
+  runInvert() {
+    const num = this._getNum1();
+    this._display(num === 0 ? 0 : -num);
+  }
+
+  runDouble() {
+    this._display(this._getNum1() * 2);
   }
 
   toggleScientific() {

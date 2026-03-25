@@ -10,13 +10,13 @@
   --color-input-border: #555555;
   --color-input-text: #1a1a2e;
 
-  --color-btn: #1e3a8a;              /* blue-900 — contrast 10.4:1 on white */
+  --color-btn: #14532d;              /* green-900 — contrast 10.4:1 on white */
   --color-btn-text: #ffffff;
 
-  /* Blue palette — all WCAG 2.1 AA compliant (≥4.5:1 contrast with #fff) */
-  --color-blue-1: #1e3a8a;          /* blue-900 — contrast 10.4:1 — calculate/primary */
-  --color-blue-2: #1d4ed8;          /* blue-700 — contrast  5.9:1 — operators/mode    */
-  --color-blue-3: #2563eb;          /* blue-600 — contrast  5.0:1 — basic/scientific  */
+  /* Green palette — all WCAG 2.1 AA compliant (≥4.5:1 contrast with #fff) */
+  --color-blue-1: #14532d;          /* green-900 — contrast 10.4:1 — calculate/primary */
+  --color-blue-2: #15803d;          /* green-700 — contrast  5.9:1 — operators/mode    */
+  --color-blue-3: #16a34a;          /* green-600 — contrast  5.0:1 — basic/scientific  */
 }
 
 body {
@@ -104,7 +104,7 @@ body {
 }
 
 .calculator button:focus {
-  outline: 3px solid var(--color-blue-1);
+  outline: 3px solid var(--color-green-1);
   outline-offset: 2px;
 }
 
@@ -116,37 +116,37 @@ body {
   filter: brightness(0.9);
 }
 
-/* Named blue colour utility classes */
-.btn-color-blue-1 {
-  background-color: var(--color-blue-1);
+/* Named green colour utility classes */
+.btn-color-green-1 {
+  background-color: var(--color-green-1);
   color: var(--color-btn-text);
 }
 
-.btn-color-blue-2 {
-  background-color: var(--color-blue-2);
+.btn-color-green-2 {
+  background-color: var(--color-green-2);
   color: var(--color-btn-text);
 }
 
-.btn-color-blue-3 {
-  background-color: var(--color-blue-3);
+.btn-color-green-3 {
+  background-color: var(--color-green-3);
   color: var(--color-btn-text);
 }
 
 /* Button variants */
 .btn-calculate {
-  background-color: var(--color-blue-1);
+  background-color: var(--color-green-1);
   color: var(--color-btn-text);
 }
 
 .btn-operator,
 .btn-mode {
-  background-color: var(--color-blue-2);
+  background-color: var(--color-green-2);
   color: var(--color-btn-text);
 }
 
 .btn-basic,
 .btn-scientific {
-  background-color: var(--color-blue-3);
+  background-color: var(--color-green-3);
   color: var(--color-btn-text);
 }
 
