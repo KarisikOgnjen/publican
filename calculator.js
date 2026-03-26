@@ -25,7 +25,7 @@ function log(num) {
   return Math.log10(num);
 }
 
-function naturalLog(num) {
+function Len(num) {
   if (num <= 0) throw new Error('ln requires a positive number');
   return Math.log(num);
 }
@@ -56,4 +56,4 @@ function double(num) {
   return num * 2;
 }
 
-module.exports = { calculate, sin, cos, tan, log, naturalLog, exp, sqrt, percentage, invert, double };
+module.exports = { calculate, sin, cos, tan, log, Len, exp, sqrt, percentage, invert, double };
