@@ -160,6 +160,7 @@ body {
   flex: 1;
 }
 
+/* Call button size */
 .btn-size-call {
   min-width: 90px;
   min-height: 48px;
