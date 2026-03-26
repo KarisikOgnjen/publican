@@ -21,16 +21,12 @@ function tan(radian) {
 }
 
 function log(num) {
-  if (num <= 0) {
-    throw new Error('log requires a positive number');
-  }
+  if (num <= 0) throw new Error('log requires a positive number');
   return Math.log10(num);
 }
 
 function ln(num) {
-  if (num <= 0) {
-    throw new Error('ln requires a positive number');
-  }
+  if (num <= 0) throw new Error('ln requires a positive number');
   return Math.log(num);
 }
 
