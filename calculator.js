@@ -21,16 +21,12 @@ function tan(radian) {
 }
 
 function log(num) {
-  if (num <= 0) {
-    throw new Error('log requires a positive number');
-  }
+  if (num <= 0) throw new Error('log requires a positive number');
   return Math.log10(num);
 }
 
-function ln(num) {
-  if (num <= 0) {
-    throw new Error('ln requires a positive number');
-  }
+function naturalLog(num) {
+  if (num <= 0) throw new Error('ln requires a positive number');
   return Math.log(num);
 }
 
@@ -60,4 +56,4 @@ function double(num) {
   return num * 2;
 }
 
-module.exports = { calculate, sin, cos, tan, log, ln, exp, sqrt, percentage, invert, double };
+module.exports = { calculate, sin, cos, tan, log, naturalLog, exp, sqrt, percentage, invert, double };
