@@ -160,13 +160,6 @@ body {
   flex: 1;
 }
 
-/* Call button size */
-.btn-size-call {
-  min-width: 90px;
-  min-height: 48px;
-  padding: 12px 24px;
-}
-
 /* Scientific panel — hidden by default */
 .scientific-panel {
   display: none;
