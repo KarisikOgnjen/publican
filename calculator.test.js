@@ -11,6 +11,7 @@ assert.strictEqual(calculate('subtract', -2, -3), 1);
 
 assert.strictEqual(calculate('multiply', 2, 3), 6);
 assert.strictEqual(calculate('multiply', -2, 3), -6);
+assert.strictEqual(calculate('multiply', 5, 0), 0);
 
 assert.strictEqual(sin(0), 0);
 assert.strictEqual(sin(Math.PI / 2), 1);
