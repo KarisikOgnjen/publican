@@ -9,7 +9,8 @@ assert.strictEqual(calculate('subtract', 5, 3), 2);
 assert.strictEqual(calculate('subtract', 0, 5), -5);
 assert.strictEqual(calculate('subtract', -2, -3), 1);
 
-assert.throws(() => calculate('multiply', 2, 3), /Unknown operation/);
+assert.strictEqual(calculate('multiply', 2, 3), 6);
+assert.strictEqual(calculate('multiply', -2, 3), -6);
 
 assert.strictEqual(sin(0), 0);
 assert.strictEqual(sin(Math.PI / 2), 1);
