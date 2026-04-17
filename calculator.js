@@ -3,6 +3,8 @@ function calculate(operation, num1, num2) {
     return num1 + num2;
   } else if (operation === 'subtract') {
     return num1 - num2;
+  } else if (operation === 'multiply') {
+    return num1 * num2;
   } else {
     throw new Error(`Unknown operation: ${operation}`);
   }
