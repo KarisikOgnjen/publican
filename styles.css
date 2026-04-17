@@ -116,17 +116,20 @@ body {
   filter: brightness(0.9);
 }
 
-/* Named green colour utility classes */
+/* Named blue/green colour utility classes */
+.btn-color-blue-1,
 .btn-color-green-1 {
   background-color: var(--color-blue-1);
   color: var(--color-btn-text);
 }
 
+.btn-color-blue-2,
 .btn-color-green-2 {
   background-color: var(--color-blue-2);
   color: var(--color-btn-text);
 }
 
+.btn-color-blue-3,
 .btn-color-green-3 {
   background-color: var(--color-blue-3);
   color: var(--color-btn-text);
