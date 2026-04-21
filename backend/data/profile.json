@@ -1,0 +1,11 @@
+{
+  "id": "user-001",
+  "firstName": "John",
+  "lastName": "Doe",
+  "email": "john.doe@example.com",
+  "phoneNumber": "+1-555-0100",
+  "jobTitle": "Sales Manager",
+  "bio": "Experienced sales professional with a focus on client relationships.",
+  "avatarUrl": null,
+  "role": "manager"
+}

@@ -1,0 +1,12 @@
+{
+  "name": "crm-profile-frontend",
+  "version": "1.0.0",
+  "description": "CRM Personal Profile Frontend Tests",
+  "private": true,
+  "scripts": {
+    "test": "node profile.test.js && node calculator.test.js && node styles.test.js"
+  },
+  "devDependencies": {
+    "jsdom": "^24.1.3"
+  }
+}

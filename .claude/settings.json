@@ -4,11 +4,13 @@
       "Bash(*)",
       "Read(*)",
       "Write(*)",
-      "Edit(*)",
       "Glob(*)",
       "Grep(*)"
     ],
-    "deny": []
+    "deny": [
+      "Edit(*)",
+      "MultiEdit(*)"
+    ]
   },
   "hooks": {
     "PostToolUse": [
