@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Personal Profile</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --clr-bg: #f0f2f5;
+      --clr-surface: #ffffff;
+      --clr-border: #d1d5db;
+      --clr-primary: #1e3a8a;
+      --clr-primary-hover: #1d4ed8;
+      --clr-text: #111827;
+      --clr-muted: #6b7280;
+      --clr-success-bg: #d1fae5;
+      --clr-success-text: #065f46;
+      --clr-error-bg: #fee2e2;
+      --clr-error-text: #991b1b;
+      --clr-avatar-bg: #e5e7eb;
+      --radius: 8px;
+      --shadow: 0 1px 6px rgba(0,0,0,0.10);
+    }
+
+    body {
+      background: var(--clr-bg);
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--clr-text);
+      min-height: 100vh;
+      padding: 2rem 1rem;
+    }
+
+    /* ── Layout ─────────────────────────────────── */
+    .page-wrapper {
+      max-width: 720px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .card {
+      background: var(--clr-surface);
+      border: 1px solid var(--clr-border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 2rem;
+    }
+
+    /* ── Profile header ──────────────────────────── */
+    .profile-header {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .avatar-wrapper {
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .avatar {
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
+      object-fit: cover;
+      background: var(--clr-avatar-bg);
+      border: 3px solid var(--clr-border);
+      display: block;
+    }
+
+    .avatar-placeholder {
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
+      background: var(--clr-avatar-bg);
+      border: 3px solid var(--clr-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      color: var(--clr-muted);
+      user-select: none;
+    }
+
+    .avatar-upload-btn {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      background: var(--clr-primary);
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      width: 28px;
+      height: 28px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      line-height: 1;
+      transition: background 0.15s;
+      padding: 0;
+    }
+
+    .avatar-upload-btn:hover { background: var(--clr-primary-hover); }
+    .avatar-upload-btn:focus {
+      outline: 3px solid var(--clr-primary);
+      outline-offset: 2px;
+    }
+
+    #avatar-file-input { display: none; }
+
+    .profile-meta {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .profile-meta h1 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .profile-meta .role {
+      color: var(--clr-muted);
+      font-size: 0.95rem;
+    }
+
+    .avatar-uploading {
+      font-size: 0.8rem;
+      color: var(--clr-muted);
+      margin-top: 0.25rem;
+    }
+
+    /* ── Alert messages ──────────────────────────── */
+    .alert {
+      padding: 0.75rem 1rem;
+      border-radius: var(--radius);
+      font-size: 0.9rem;
+      display: none;
+    }
+
+    .alert.visible { display: block; }
+    .alert-success { background: var(--clr-success-bg); color: var(--clr-success-text); }
+    .alert-error   { background: var(--clr-error-bg);   color: var(--clr-error-text);   }
+
+    /* ── Loading skeleton ────────────────────────── */
+    .loading-overlay {
+      text-align: center;
+      padding: 2rem;
+      color: var(--clr-muted);
+      font-size: 0.95rem;
+    }
+
+    /* ── Form ────────────────────────────────────── */
+    .profile-form { display: flex; flex-direction: column; gap: 1.25rem; }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    @media (max-width: 520px) {
+      .form-row { grid-template-columns: 1fr; }
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+
+    .field label {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--clr-text);
+    }
+
+    .field label .required {
+      color: #dc2626;
+      margin-left: 2px;
+    }
+
+    .field input,
+    .field textarea {
+      border: 1.5px solid var(--clr-border);
+      border-radius: 6px;
+      padding: 0.5rem 0.75rem;
+      font-size: 0.95rem;
+      font-family: inherit;
+      color: var(--clr-text);
+      background: #fff;
+      width: 100%;
+      transition: border-color 0.15s;
+    }
+
+    .field textarea {
+      resize: vertical;
+      min-height: 90px;
+    }
+
+    .field input:focus,
+    .field textarea:focus {
+      outline: none;
+      border-color: var(--clr-primary);
+      box-shadow: 0 0 0 3px rgba(30,58,138,0.12);
+    }
+
+    .field input.invalid,
+    .field textarea.invalid {
+      border-color: #dc2626;
+    }
+
+    .field-error {
+      font-size: 0.8rem;
+      color: #dc2626;
+      min-height: 1em;
+    }
+
+    /* ── Actions ─────────────────────────────────── */
+    .form-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 0.75rem;
+      padding-top: 0.5rem;
+    }
+
+    .btn-primary {
+      background: var(--clr-primary);
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      padding: 0.6rem 1.5rem;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.15s;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .btn-primary:hover:not(:disabled) { background: var(--clr-primary-hover); }
+    .btn-primary:disabled { opacity: 0.6; cursor: not-allowed; }
+    .btn-primary:focus {
+      outline: 3px solid var(--clr-primary);
+      outline-offset: 2px;
+    }
+
+    .spinner {
+      width: 14px;
+      height: 14px;
+      border: 2px solid rgba(255,255,255,0.4);
+      border-top-color: #fff;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      display: none;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ── Section heading ─────────────────────────── */
+    .section-title {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: var(--clr-text);
+      border-bottom: 1px solid var(--clr-border);
+      padding-bottom: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="page-wrapper">
+
+    <!-- Profile Header Card -->
+    <div class="card" id="header-card">
+      <div id="header-loading" class="loading-overlay">Loading profile…</div>
+      <div id="header-content" class="profile-header" hidden>
+        <div class="avatar-wrapper">
+          <div class="avatar-placeholder" id="avatar-placeholder" aria-hidden="true">👤</div>
+          <img class="avatar" id="avatar-img" src="" alt="Profile avatar" hidden />
+          <button
+            class="avatar-upload-btn"
+            id="avatar-btn"
+            title="Change avatar"
+            aria-label="Change avatar"
+          >✎</button>
+          <input type="file" id="avatar-file-input" accept="image/*" />
+        </div>
+        <div class="profile-meta">
+          <h1 id="header-name">—</h1>
+          <div class="role" id="header-role">—</div>
+          <div class="avatar-uploading" id="avatar-uploading" hidden>Uploading…</div>
+          <div class="alert alert-error" id="avatar-error" role="alert"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Profile Form Card -->
+    <div class="card">
+      <p class="section-title">Personal Information</p>
+
+      <div id="form-loading" class="loading-overlay">Loading…</div>
+
+      <div id="form-error-global" class="alert alert-error" role="alert" style="margin-bottom:1rem"></div>
+      <div id="form-success" class="alert alert-success" role="status" style="margin-bottom:1rem"></div>
+
+      <form class="profile-form" id="profile-form" novalidate hidden>
+        <div class="form-row">
+          <div class="field">
+            <label for="firstName">First Name <span class="required" aria-hidden="true">*</span></label>
+            <input type="text" id="firstName" name="firstName" required autocomplete="given-name" />
+            <span class="field-error" id="err-firstName" role="alert"></span>
+          </div>
+          <div class="field">
+            <label for="lastName">Last Name <span class="required" aria-hidden="true">*</span></label>
+            <input type="text" id="lastName" name="lastName" required autocomplete="family-name" />
+            <span class="field-error" id="err-lastName" role="alert"></span>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="email">Email <span class="required" aria-hidden="true">*</span></label>
+          <input type="email" id="email" name="email" required autocomplete="email" />
+          <span class="field-error" id="err-email" role="alert"></span>
+        </div>
+
+        <div class="field">
+          <label for="phone">Phone Number</label>
+          <input type="tel" id="phone" name="phone" autocomplete="tel" placeholder="+1 555 000 0000" />
+          <span class="field-error" id="err-phone" role="alert"></span>
+        </div>
+
+        <div class="field">
+          <label for="bio">Bio / Job Title</label>
+          <textarea id="bio" name="bio" rows="3" placeholder="Your role or a short bio…"></textarea>
+          <span class="field-error" id="err-bio" role="alert"></span>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="btn-primary" id="save-btn">
+            <span class="spinner" id="save-spinner" aria-hidden="true"></span>
+            Save Changes
+          </button>
+        </div>
+      </form>
+    </div>
+
+  </div>
+
+  <script>
+    const API = '/api/profile';
+    const PHONE_RE = /^\+?[\d\s\-().]{7,20}$/;
+
+    /* ── DOM refs ──────────────────────────────── */
+    const headerLoading  = document.getElementById('header-loading');
+    const headerContent  = document.getElementById('header-content');
+    const headerName     = document.getElementById('header-name');
+    const headerRole     = document.getElementById('header-role');
+    const avatarPlaceholder = document.getElementById('avatar-placeholder');
+    const avatarImg      = document.getElementById('avatar-img');
+    const avatarBtn      = document.getElementById('avatar-btn');
+    const avatarFileInput = document.getElementById('avatar-file-input');
+    const avatarUploading = document.getElementById('avatar-uploading');
+    const avatarError    = document.getElementById('avatar-error');
+
+    const formLoading    = document.getElementById('form-loading');
+    const profileForm    = document.getElementById('profile-form');
+    const formSuccess    = document.getElementById('form-success');
+    const formErrorGlobal = document.getElementById('form-error-global');
+    const saveBtn        = document.getElementById('save-btn');
+    const saveSpinner    = document.getElementById('save-spinner');
+
+    const fields = {
+      firstName: document.getElementById('firstName'),
+      lastName:  document.getElementById('lastName'),
+      email:     document.getElementById('email'),
+      phone:     document.getElementById('phone'),
+      bio:       document.getElementById('bio'),
+    };
+
+    /* ── Helpers ───────────────────────────────── */
+    function showAlert(el, msg) {
+      el.textContent = msg;
+      el.classList.add('visible');
+    }
+
+    function hideAlert(el) {
+      el.textContent = '';
+      el.classList.remove('visible');
+    }
+
+    function setFieldError(name, msg) {
+      const errEl = document.getElementById('err-' + name);
+      const input = fields[name];
+      if (!errEl || !input) return;
+      errEl.textContent = msg || '';
+      if (msg) input.classList.add('invalid');
+      else input.classList.remove('invalid');
+    }
+
+    function clearAllErrors() {
+      Object.keys(fields).forEach(k => setFieldError(k, ''));
+      hideAlert(formErrorGlobal);
+      hideAlert(formSuccess);
+    }
+
+    /* ── Populate form & header ────────────────── */
+    function populate(data) {
+      fields.firstName.value = data.firstName || '';
+      fields.lastName.value  = data.lastName  || '';
+      fields.email.value     = data.email     || '';
+      fields.phone.value     = data.phoneNumber || data.phone || '';
+      fields.bio.value       = data.jobTitle  || data.bio    || '';
+
+      const fullName = [data.firstName, data.lastName].filter(Boolean).join(' ') || 'Unknown';
+      headerName.textContent = fullName;
+      headerRole.textContent = data.jobTitle || data.bio || 'No title set';
+
+      if (data.avatarUrl) {
+        avatarImg.src = data.avatarUrl;
+        avatarImg.hidden = false;
+        avatarPlaceholder.hidden = true;
+      }
+    }
+
+    /* ── Fetch profile ─────────────────────────── */
+    async function loadProfile() {
+      try {
+        const res = await fetch(API);
+        if (!res.ok) throw new Error(res.status === 401 ? 'Unauthorized — please log in.' : `Server error (${res.status})`);
+        const data = await res.json();
+        populate(data);
+        headerLoading.hidden  = true;
+        headerContent.hidden  = false;
+        formLoading.hidden    = true;
+        profileForm.hidden    = false;
+      } catch (err) {
+        headerLoading.textContent = 'Failed to load profile.';
+        formLoading.textContent   = '';
+        showAlert(formErrorGlobal, err.message || 'Failed to load profile.');
+        profileForm.hidden = false;
+      }
+    }
+
+    /* ── Validate ──────────────────────────────── */
+    function validate() {
+      let valid = true;
+
+      if (!fields.firstName.value.trim()) {
+        setFieldError('firstName', 'First name is required.');
+        valid = false;
+      }
+
+      if (!fields.lastName.value.trim()) {
+        setFieldError('lastName', 'Last name is required.');
+        valid = false;
+      }
+
+      const emailVal = fields.email.value.trim();
+      if (!emailVal) {
+        setFieldError('email', 'Email is required.');
+        valid = false;
+      } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailVal)) {
+        setFieldError('email', 'Enter a valid email address.');
+        valid = false;
+      }
+
+      const phoneVal = fields.phone.value.trim();
+      if (phoneVal && !PHONE_RE.test(phoneVal)) {
+        setFieldError('phone', 'Enter a valid phone number.');
+        valid = false;
+      }
+
+      return valid;
+    }
+
+    /* ── Save profile ──────────────────────────── */
+    profileForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      clearAllErrors();
+      if (!validate()) return;
+
+      const payload = {
+        firstName:   fields.firstName.value.trim(),
+        lastName:    fields.lastName.value.trim(),
+        email:       fields.email.value.trim(),
+        phoneNumber: fields.phone.value.trim() || null,
+        jobTitle:    fields.bio.value.trim()   || null,
+      };
+
+      saveBtn.disabled = true;
+      saveSpinner.style.display = 'block';
+
+      try {
+        const res = await fetch(API, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+
+        if (!res.ok) {
+          let errMsg = `Save failed (${res.status})`;
+          try {
+            const body = await res.json();
+            if (body.message) errMsg = body.message;
+            // Handle field-level validation errors from the server
+            if (body.errors && typeof body.errors === 'object') {
+              Object.entries(body.errors).forEach(([field, msg]) => {
+                const key = field === 'phoneNumber' ? 'phone' : field;
+                setFieldError(key, msg);
+              });
+              return;
+            }
+          } catch (_) { /* ignore parse error */ }
+          throw new Error(errMsg);
+        }
+
+        const updated = await res.json();
+        populate(updated);
+        showAlert(formSuccess, 'Profile saved successfully.');
+      } catch (err) {
+        showAlert(formErrorGlobal, err.message || 'An error occurred while saving.');
+      } finally {
+        saveBtn.disabled = false;
+        saveSpinner.style.display = 'none';
+      }
+    });
+
+    /* ── Avatar upload ─────────────────────────── */
+    avatarBtn.addEventListener('click', () => avatarFileInput.click());
+
+    avatarFileInput.addEventListener('change', async () => {
+      const file = avatarFileInput.files[0];
+      if (!file) return;
+      avatarFileInput.value = '';
+
+      hideAlert(avatarError);
+      avatarUploading.hidden = false;
+      avatarBtn.disabled = true;
+
+      try {
+        const formData = new FormData();
+        formData.append('avatar', file);
+
+        const res = await fetch(`${API}/avatar`, {
+          method: 'POST',
+          body: formData,
+        });
+
+        if (!res.ok) throw new Error(`Upload failed (${res.status})`);
+        const data = await res.json();
+
+        if (data.avatarUrl) {
+          avatarImg.src = data.avatarUrl;
+          avatarImg.hidden = false;
+          avatarPlaceholder.hidden = true;
+        }
+      } catch (err) {
+        showAlert(avatarError, err.message || 'Avatar upload failed.');
+      } finally {
+        avatarUploading.hidden = true;
+        avatarBtn.disabled = false;
+      }
+    });
+
+    /* ── Init ──────────────────────────────────── */
+    loadProfile();
+  </script>
+</body>
+</html>
